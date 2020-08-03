@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 @author : cy023
-@date   : 2020.8.2
+@date   : 2020.8.3
 @brief  : Perceptron Learning Algorithm Implement.
 '''
 import matplotlib.pyplot as plt
@@ -9,36 +9,12 @@ import numpy as np
 #TODO : 設定收斂條件
 
 def predict(x, w):
-    """ sign function.
-    The np.sign(x) function, when np.sign(0), it returns 0.
-    We need 
-        when x >= 0, sign(x) = 1
-        when x < 0, sign(x) = -1
-
-    Args:
-        x : 
-        w : 
-
-    Returns:
-
-    """
     if w.T.dot(np.array(x)) >= 0:
         return 1
     elif w.T.dot(np.array(x)) < 0:
         return -1
 
 def check_error(w, dataset):
-    """ 檢查目前的權重對於訓練資料的正確性
-    訓練資料集包含 :
-        x = {a1, a2, a3, ...} , 多維的點資料
-        y = 
-    Args:
-        w : 
-        dataset : 
-
-    Returns:
-        w.T.dot(x) 
-    """
     count_error = 0
     for x, y in dataset:
         if predict(x, w) != y:
