@@ -99,16 +99,3 @@ if __name__ == "__main__":
 
     w = pla(eta, dataset)
     plot_pla(w, dataset)
-
-
-
-def check_error(w, dataset):
-    result = None
-    error = 0
-    for x, s in dataset:
-        x = np.array(x)
-        if int(np.sign(w.T.dot(x))) != s:
-            result =  x, s
-            error += 1
-    print("error=%s/%s" % (error, len(dataset)))
-    return result
