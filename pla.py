@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 '''
 @author : cy023
-@date   : 2020.8.3
+@date   : 2020.8.6
 @brief  : Perceptron Learning Algorithm Implement.
 '''
 import matplotlib.pyplot as plt
 import numpy as np
-#TODO : 設定收斂條件
 
 def predict(x, w):
     """
@@ -35,10 +34,9 @@ def pla(eta, dataset, limit=5000):
             if predict(x, w) != y:
                 w += y * eta * np.array(x)
                 count += 1
-        err_count = check_error(w, dataset)
-        if err_count == 0 or count >= limit:
+        if count >= limit:
             break
-        print("error count : %d, update count : %d" % (err_count, count))
+        print("error count : %d, update count : %d" % (check_error(w, dataset), count))
     return w
 
 def read_txt_data(data_path):
@@ -47,7 +45,7 @@ def read_txt_data(data_path):
     x = np.insert(x, 0, 1, axis=1)
     y = data[:, -1:]
     y = np.where(y == 1, -1, 1)
-    return np.array(list(zip(x, y)))
+    return np.array(list(zip(x, y)), dtype=object)
 
 def shuffle(dataset):
     return np.take(dataset, np.random.permutation(dataset.shape[0]), axis=0)
@@ -71,6 +69,8 @@ def plot_pla(w, dataset):
     plt.legend()
     plt.savefig("./images/pla.png")
     plt.show()
+
+
 
 if __name__ == "__main__":
 
