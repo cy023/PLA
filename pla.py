@@ -9,19 +9,25 @@ import numpy as np
 #TODO : 設定收斂條件
 
 def predict(x, w):
+    """
+    sign function.
+    """
     if w.T.dot(np.array(x)) >= 0:
         return 1
     elif w.T.dot(np.array(x)) < 0:
         return -1
 
 def check_error(w, dataset):
+    """
+    檢查訓練出來的權重帶入 training data 還有幾筆輸出與 label 不一樣。 
+    """
     count_error = 0
     for x, y in dataset:
         if predict(x, w) != y:
             count_error += 1
     return count_error
 
-def pla(eta, dataset):
+def pla(eta, dataset, limit=5000):
     w = np.zeros(len(dataset[0][0]))
     count = 0
     while check_error(w, dataset) != 0:
@@ -30,7 +36,7 @@ def pla(eta, dataset):
                 w += y * eta * np.array(x)
                 count += 1
         err_count = check_error(w, dataset)
-        if err_count == 0 or count >= 5000:
+        if err_count == 0 or count >= limit:
             break
         print("error count : %d, update count : %d" % (err_count, count))
     return w
@@ -47,7 +53,7 @@ def shuffle(dataset):
     return np.take(dataset, np.random.permutation(dataset.shape[0]), axis=0)
 
 def plot_pla(w, dataset):
-    x = np.linspace(0, 7.5)
+    x = np.linspace(-10, 10)
     a, b = -w[1]/w[2], -w[0]/w[2]
 
     P = [vector[0] for vector in dataset]
@@ -59,8 +65,8 @@ def plot_pla(w, dataset):
     plt.scatter([P[i][1] for i in C2_area], [P[i][2] for i in C2_area], s=10, c='r', marker="x", label='X')
     plt.plot(x, a*x + b, 'b-')
     plt.plot(0, 0, 'g+')
-    plt.xlim([0, 7.5])
-    plt.ylim([0, 7.5])
+    plt.xlim([-10, 10])
+    plt.ylim([-10, 10])
     # plt.tight_layout()
     plt.legend()
     plt.savefig("./images/pla.png")
@@ -68,7 +74,7 @@ def plot_pla(w, dataset):
 
 if __name__ == "__main__":
 
-    dataset = read_txt_data('./data/2CS.txt')
+    dataset = read_txt_data('./data/2Ccircle1.txt')
     dataset = shuffle(dataset)
 
     eta = float(input('please input learning rate '))
