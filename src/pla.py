@@ -47,9 +47,6 @@ def read_txt_data(data_path):
     y = np.where(y == 1, -1, 1)
     return np.array(list(zip(x, y)), dtype=object)
 
-def shuffle(dataset):
-    return np.take(dataset, np.random.permutation(dataset.shape[0]), axis=0)
-
 def plot_pla(w, dataset):
     x = np.linspace(-10, 10)
     a, b = -w[1]/w[2], -w[0]/w[2]
@@ -75,24 +72,9 @@ def plot_pla(w, dataset):
 if __name__ == "__main__":
 
     dataset = read_txt_data('./data/2Ccircle1.txt')
-    dataset = shuffle(dataset)
+    np.random.shuffle(dataset)
 
     eta = float(input('please input learning rate '))
 
     w = pla(eta, dataset)
     plot_pla(w, dataset)
-
-
-
-
-
-# C1_area = [i for i in range(dataset.shape[0]) if dataset[i][1] ==  1]
-
-# C1_area = []
-# C2_area = []
-# for i in range(dataset.shape[0]):
-#     if dataset[i][1] == 1:
-#         C1_area.append(i)
-#     elif dataset[i][1] == -1:
-#         C2_area.append(i)
-

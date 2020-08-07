@@ -62,9 +62,6 @@ def read_txt_data(data_path):
     y = np.where(y == 1, -1, 1)
     return np.array(list(zip(x, y)), dtype=object)
 
-def shuffle(dataset):
-    return np.take(dataset, np.random.permutation(dataset.shape[0]), axis=0)
-
 def plot_data(dataset):
     P = [vector[0] for vector in dataset]
     
@@ -88,8 +85,8 @@ def update_plot(w, dataset):
     plot_data(dataset)
     plot_w(w)
     plt.draw()
-    plt.savefig('./Images/temp.png')
-    image_list.append(imageio.imread('./Images/temp.png'))
+    plt.savefig('./images/temp.png')
+    image_list.append(imageio.imread('./images/temp.png'))
     plt.pause(0.2)
 
 
@@ -97,7 +94,7 @@ def update_plot(w, dataset):
 if __name__ == "__main__":
 
     dataset = read_txt_data('./data/2CS.txt')
-    dataset = shuffle(dataset)
+    np.random.shuffle(dataset)
 
     eta = float(input('please input learning rate '))
 
@@ -110,7 +107,7 @@ if __name__ == "__main__":
     for i in range(5):
         image_list.append(image_list[len(image_list)-1])
     
-    imageio.mimsave('./Images/result.gif', image_list, duration=0.2)
+    imageio.mimsave('./images/result.gif', image_list, duration=0.2)
 
     plt.ioff()
     plt.show()
