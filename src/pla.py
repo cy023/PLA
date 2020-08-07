@@ -81,3 +81,18 @@ if __name__ == "__main__":
 
     w = pla(eta, dataset)
     plot_pla(w, dataset)
+
+
+
+
+
+# C1_area = [i for i in range(dataset.shape[0]) if dataset[i][1] ==  1]
+
+# C1_area = []
+# C2_area = []
+# for i in range(dataset.shape[0]):
+#     if dataset[i][1] == 1:
+#         C1_area.append(i)
+#     elif dataset[i][1] == -1:
+#         C2_area.append(i)
+
