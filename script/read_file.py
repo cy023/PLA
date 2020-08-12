@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+'''
+@author : cy023
+@date   : 2020.8.9
+@brief  : Read dataset filename script.
+'''
 import os
 dirPath = r".\data"
 

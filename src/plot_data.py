@@ -21,10 +21,8 @@ def plot_pla(dataset):
     C1_area = [i for i in range(dataset.shape[0]) if dataset[i][1] ==  1]
     C2_area = [i for i in range(dataset.shape[0]) if dataset[i][1] == -1]
 
-    plt.scatter([P[i][1] for i in C1_area], [P[i][2] for i in C1_area], s=10, c='b', marker="o", label='O')
-    plt.scatter([P[i][1] for i in C2_area], [P[i][2] for i in C2_area], s=10, c='r', marker="x", label='X')
-    # plt.xlim([-10, 10])
-    # plt.ylim([-10, 10])
+    plt.scatter([P[i][1] for i in C1_area], [P[i][2] for i in C1_area], s=10, c='b', marker="o", label='Class1')
+    plt.scatter([P[i][1] for i in C2_area], [P[i][2] for i in C2_area], s=10, c='r', marker="o", label='Class2')
     plt.tight_layout()
     plt.legend()
     plt.show()
@@ -41,5 +39,3 @@ if __name__ == "__main__":
         files[i] = files[i].strip('\n')
         dataset = read_txt_data("./data/" + str(files[i]))
         plot_pla(dataset)
-
-    
